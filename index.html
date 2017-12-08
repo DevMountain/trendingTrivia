@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app='app'>
 
 <head>
   <meta charset="utf-8">
@@ -13,11 +13,13 @@
   <header>
     <div></div>
     <h1>Trivia Trends</h1>
-    <button><span>+</span> Add Question</button>
+    <button>
+      <span>+</span> Add Question</button>
   </header>
   <article>
     <nav>
       <a>All Questions</a>
+      <!-- the links below need to be assigned filter properties along with the questions list -->
       <a>Easy</a>
       <a>Medium</a>
       <a>Hard</a>
@@ -31,11 +33,13 @@
 
   </article>
 
-  <div class="modal">
+  <div class="modal" ng-show="">
     <form>
       <h4 class="close">X</h4>
-      <span>Question</span><input type="text" ng-model="<!-- Question -->">
-      <span>Animal it's about</span><input type="text" ng-model="<!-- Animal -->">
+      <span>Question</span>
+      <input type="text" ng-model="<!-- Question -->">
+      <span>Animal it's about</span>
+      <input type="text" ng-model="<!-- Animal -->">
       <span>Difficulty</span>
       <div class="range">
         <input type="range" min="1" max="3" ng-model="<!-- Difficulty -->">
@@ -81,7 +85,13 @@
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js" charset="utf-8"></script>
-  <script src="./app.js" charset="utf-8"></script>
+  <script src="./src/app.js" charset="utf-8"></script>
+  <script src="./src/mainSrvc.js"></script>
+  <script src="./src/components/addQuestion/addQuestion.js"></script>
+  <script src="./src/components/question/question"></script>
+  <script src="./src/components/question/questionList"></script>
+  <script src="./src/components/NavComp/nav.js"></script>
+
 </body>
 
 </html>
