@@ -228,3 +228,38 @@ input[type="range"] {
 .red {
   background: rgb(218, 45, 123);
 }
+.questionCard{
+  background: white;
+  width:90%;
+  height: 10rem;
+  margin: 20px auto;
+  padding:15px;
+  display:flex;
+  flex-flow: row wrap;
+  justify-content: space-between
+
+}
+.questionCard h1{
+  font-weight: bold;
+  /* margin-top:20px; */
+}
+.questionCard img {
+  width:30px;
+  /* height: auto; */
+}
+.questionOptions{
+  display:flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  width:100%;
+}
+.questionFlexWrapper{
+  display: flex;
+  flex-flow: row nowrap;
+  height:10%;
+  width:10%;
+  justify-content: flex-end;
+  align-items: center;
+}
+
