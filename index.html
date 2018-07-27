@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 
 <head>
   <meta charset="utf-8">
@@ -9,11 +9,11 @@
   <link rel="shortcut icon" href="/styles/assets/crownFavicon.png">
 </head>
 
-<body>
+<body ng-controller="questionsCtrl">
   <header>
     <div></div>
     <h1>Trivia Trends</h1>
-    <button><span>+</span> Add Question</button>
+    <button ng-click="showModal()"><span>+</span> Add Question</button>
   </header>
   <article>
     <nav>
@@ -26,51 +26,65 @@
     <div class="search">
       <input type="text" placeholder="Animal to search by">
     </div>
+    <div ng-repeat="question in questions">
+      <div class="questionCard" ng-style='newColor'>
+        <h1>{{question.question}}</h1>
+        <div class="questionFlexWrapper">
 
+          <img src="./styles/assets/gear.svg" ng-click="showEditModal(question)" alt="gear">
+          <span style="background:green" ng-show="question.difficulty === 1">Easy</span>
+          <span style="background:yellow" ng-show="question.difficulty === 2">Medium</span>
+          <span style="background:red" ng-show="question.difficulty === 3">Hard</span>
+        </div>
+        <h1 ng-show='isCorrect'>Correct!</h1>
+        <ul class="questionOptions">
+          <li ng-repeat="(key,val) in question.options" ng-click="correctAnswer(key, question.correct_answer)">{{ val }}</li>
+      </div>
+    </div>
     <!-- Questions go here -->
 
   </article>
 
-  <div class="modal">
+  <div class="modal" ng-show="modalAddOrEdit">
     <form>
-      <h4 class="close">X</h4>
-      <span>Question</span><input type="text" ng-model="<!-- Question -->">
-      <span>Animal it's about</span><input type="text" ng-model="<!-- Animal -->">
+      <h4 class="close" ng-click="cancelSave()">X</h4>
+      <span>Question</span><input type="text" ng-model="newQuestion.question">
+      <span>Animal it's about</span><input type="text" ng-model="newQuestion.animal">
       <span>Difficulty</span>
       <div class="range">
-        <input type="range" min="1" max="3" ng-model="<!-- Difficulty -->">
+        <input type="range" min="1" max="3" ng-model="newQuestion.difficulty">
 
         <h5>{{newQuestion.difficulty}}</h5>
       </div>
       <h4>Options</h4>
       <div>
-        <input type="radio" ng-model="" value="1">
-        <input type="text" ng-model="">
+        <input type="radio" ng-model="newQuestion.correct_answer" value="1">
+        <input type="text" ng-model="option1">
       </div>
       <div>
-        <input type="radio" ng-model="" value="2">
-        <input type="text" ng-model="">
+        <input type="radio" ng-model="newQuestion.correct_answer" value="2">
+        <input type="text" ng-model="option2">
       </div>
       <div>
-        <input type="radio" ng-model="" value="3">
-        <input type="text" ng-model="">
+        <input type="radio" ng-model="newQuestion.correct_answer" value="3">
+        <input type="text" ng-model="option3">
       </div>
       <div>
-        <input type="radio" ng-model="" value="4">
-        <input type="text" ng-model="">
+        <input type="radio" ng-model="newQuestion.correct_answer" value="4">
+        <input type="text" ng-model="option4">
       </div>
 
       <!--Add question buttons-->
-      <div class="buttons">
-        <button class="green">Save Question</button>
-        <button>Cancel</button>
+      <div class="buttons" ng-show="!editQuestion">
+        <button class="green" ng-click="saveNew()">Save Question</button>
+        <button ng-click="cancelSave()">Cancel</button>
       </div>
 
       <!--Edit & Delete question buttons-->
-      <div class="buttons">
-        <button class="red">Delete Question</button>
-        <button class="green">Save Changes</button>
-        <button>Cancel</button>
+      <div class="buttons" ng-show="editQuestion">
+        <button class="red" ng-click="deleteEdit(editId)">Delete Question</button>
+        <button class="green" ng-click="saveEdit(editId, newQuestion)">Save Changes</button>
+        <button ng-click="cancelEdit()">Cancel</button>
       </div>
 
     </form>
@@ -81,7 +95,9 @@
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js" charset="utf-8"></script>
-  <script src="./app.js" charset="utf-8"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.js"></script> -->
+  <script src="./js/app.js" charset="utf-8"></script>
+  <script src="./js/questionsCtrl.js"></script>
 </body>
 
 </html>
